@@ -1,0 +1,60 @@
+/* ---------------------------
+   GLOBAL RESET (safe + minimal)
+---------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  background: #f8fbfe; /* Light neutral background */
+  color: #0f172a;
+}
+
+/* Remove the Vite template restrictions */
+#root {
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+/* Remove demo/card/logo stuff */
+.logo,
+.card,
+.read-the-docs {
+  all: unset;
+}
+
+/* Safe defaults for buttons & anchors */
+button,
+a {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Prevent unwanted global center text alignment */
+body,
+#root {
+  text-align: left !important;
+}
+
+/* Make scrolling smooth everywhere */
+html {
+  scroll-behavior: smooth;
+}
+
+/* No dark mode bleed from system prefs */
+:root {
+  color-scheme: light;
+}

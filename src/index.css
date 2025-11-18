@@ -1,0 +1,36 @@
+/* Reset defaults */
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Force light theme */
+  color-scheme: light;
+  color: #0f172a;
+  background-color: #f8fbfe;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* REMOVE the flex/centering body */
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+}
+
+/* Keep clean defaults */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
