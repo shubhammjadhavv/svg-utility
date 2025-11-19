@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 
 export default function SVGwithPathFiller() {
+  const [showHelp, setShowHelp] = useState(false);
   // --- State
   const [rawSvg, setRawSvg] = useState("");
   const [fillColor, setFillColor] = useState("#0ea5e9");
@@ -57,18 +58,9 @@ export default function SVGwithPathFiller() {
             <div className="tf-meta">
               {/* Gradient path filler · borders preserved */}
             </div>
-            <a
-              className="tf-btn"
-              href="#preview"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .querySelector(".tf-preview")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              Scroll to Download
-            </a>
+            <button className="tf-btn" onClick={() => setShowHelp(true)}>
+              Help
+            </button>
           </div>
         </div>
       </header>
@@ -216,6 +208,27 @@ export default function SVGwithPathFiller() {
           </div>
         </aside>
       </main>
+      {showHelp && (
+        <div className="help-overlay" onClick={() => setShowHelp(false)}>
+          <div className="help-modal" onClick={(e) => e.stopPropagation()}>
+            <h2>How to Use</h2>
+
+            <ul>
+              <li>
+                Paste any valid SVG with a <code>viewBox</code>.
+              </li>
+              <li>Pick a fill color and adjust the fill level.</li>
+              <li>Offsets help prevent the fill from overlapping borders.</li>
+              <li>The preview updates instantly as you edit.</li>
+              <li>Copy or download the final SVG from the Output section.</li>
+            </ul>
+
+            <button className="tf-btn" onClick={() => setShowHelp(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -229,6 +242,46 @@ html, body, #root {
   width: auto !important;
   max-width: none !important;
 }
+
+/* ===== HELP MODAL ===== */
+.help-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.help-modal {
+  background: white;
+  padding: 24px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  animation: fadeIn 0.2s ease;
+}
+
+.help-modal h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.help-modal ul {
+  padding-left: 18px;
+  margin-bottom: 20px;
+  color: #444;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 
 /* —— Wrapper takes over the whole screen —— */
 .tf-wrap {
