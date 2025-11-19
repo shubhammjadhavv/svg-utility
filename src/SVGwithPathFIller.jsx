@@ -159,10 +159,16 @@ export default function SVGwithPathFiller() {
               <p className="sub">Updates in real time</p>
             </div>
 
-            <div
-              className="preview-area"
-              dangerouslySetInnerHTML={{ __html: processed || placeholderSvg }}
-            />
+            <div className="preview-area">
+              {processed ? (
+                <div dangerouslySetInnerHTML={{ __html: processed }} />
+              ) : (
+                <div className="empty-preview">
+                  <div className="empty-icon">📄</div>
+                  <div className="empty-text">Add an SVG to preview</div>
+                </div>
+              )}
+            </div>
 
             <div className="preview-footer">
               <div className="tiny">
@@ -198,7 +204,7 @@ export default function SVGwithPathFiller() {
               <a
                 className="tf-btn"
                 href={`data:text/xml;charset=utf-8,${encodeURIComponent(
-                  processed || placeholderSvg
+                  processed
                 )}`}
                 download="tank-filled.svg"
               >
@@ -265,6 +271,7 @@ html, body, #root {
   animation: fadeIn 0.2s ease;
 }
 
+
 .help-modal h2 {
   margin-top: 0;
   margin-bottom: 10px;
@@ -322,6 +329,28 @@ html, body, #root {
   font-size: 13px;
   color: #0ea5e9;
 }
+  /* Empty preview state */
+.empty-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  opacity: 0.55;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.empty-icon {
+  font-size: 40px;
+  margin-bottom: 6px;
+}
+
+.empty-text {
+  font-size: 14px;
+  color: #64748b;
+}
+
 
 /* —— Grid Layout —— */
 .tf-main {
@@ -576,17 +605,3 @@ function processSvgToPathFiller(
 
   return new XMLSerializer().serializeToString(svg);
 }
-
-const placeholderSvg = `
-<svg viewBox="0 0 200 200" width="100%" height="220">
-  <rect x="20" y="20" width="160" height="160" stroke="#0f172a" fill="none" rx="12"/>
-  <defs>
-    <linearGradient id="gradPh" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#0ea5e9"/>
-      <stop offset="50%" stop-color="#0ea5e9"/>
-      <stop offset="50%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="transparent"/>
-    </linearGradient>
-  </defs>
-  <path d="M20 100H180V180H20Z" fill="url(#gradPh)" />
-</svg>`;
